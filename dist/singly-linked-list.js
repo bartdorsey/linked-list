@@ -1,34 +1,22 @@
-export namespace SinglyLinkedList {
-    interface Node<T> {
-        value: T
-        next?: Node<T>
-    }
-
-    interface LinkedList<T> {
-        head?: Node<T>
-        length: number
-    }
-
+export var SinglyLinkedList
+;(function (SinglyLinkedList) {
     // Creates a node object
-    export function createNode<T>(value: T, next?: Node<T>): Node<T> {
+    function createNode(value, next) {
         return {
             value,
             next,
         }
     }
-
+    SinglyLinkedList.createNode = createNode
     // Creates a list object
-    export function createLinkedList<T>(): LinkedList<T> {
-        const list: LinkedList<T> = {
+    function createLinkedList() {
+        const list = {
             length: 0,
         }
         return list
     }
-
-    export function findNodeAtIndex<T>(
-        list: LinkedList<T>,
-        index: number
-    ): Node<T> | undefined {
+    SinglyLinkedList.createLinkedList = createLinkedList
+    function findNodeAtIndex(list, index) {
         // We start at the head
         let currentNode = list.head
         // Loop through the node, until we get to index
@@ -44,11 +32,8 @@ export namespace SinglyLinkedList {
         // If we made it here we return the currentNode
         return currentNode
     }
-
-    export function getValueAtIndex<T>(
-        list: LinkedList<T>,
-        index: number
-    ): T | undefined {
+    SinglyLinkedList.findNodeAtIndex = findNodeAtIndex
+    function getValueAtIndex(list, index) {
         const node = findNodeAtIndex(list, index)
         if (node != undefined) {
             return node.value
@@ -56,9 +41,9 @@ export namespace SinglyLinkedList {
             return
         }
     }
-
-    export function listToArray<T>(list: LinkedList<T>): T[] {
-        const arr: T[] = []
+    SinglyLinkedList.getValueAtIndex = getValueAtIndex
+    function listToArray(list) {
+        const arr = []
         let currentNode = list.head
         while (currentNode) {
             arr.push(currentNode.value)
@@ -66,11 +51,10 @@ export namespace SinglyLinkedList {
         }
         return arr
     }
-
-    export function addValueToHead<T>(list: LinkedList<T>, value: T): void {
+    SinglyLinkedList.listToArray = listToArray
+    function addValueToHead(list, value) {
         // Create a new node
         const newNode = createNode(value)
-
         if (list.length === 0) {
             list.head = newNode
         } else {
@@ -82,8 +66,8 @@ export namespace SinglyLinkedList {
         // Increase the size of the list
         list.length++
     }
-
-    export function addValueToTail<T>(list: LinkedList<T>, value: T): void {
+    SinglyLinkedList.addValueToHead = addValueToHead
+    function addValueToTail(list, value) {
         const newNode = createNode(value)
         // if the list is empty set the node
         // to be the head
@@ -100,8 +84,8 @@ export namespace SinglyLinkedList {
         list.length++
         return
     }
-
-    export function removeFromHead<T>(list: LinkedList<T>): T | undefined {
+    SinglyLinkedList.addValueToTail = addValueToTail
+    function removeFromHead(list) {
         // If the list is empty do nothing
         if (list.length === 0) {
             return
@@ -125,13 +109,13 @@ export namespace SinglyLinkedList {
         // Return the value
         return value
     }
-
-    export function removeFromTail<T>(list: LinkedList<T>): T | undefined {
+    SinglyLinkedList.removeFromHead = removeFromHead
+    function removeFromTail(list) {
         // if there's no head, just return undefinded
         if (!list.head) {
             return
         }
-        let value: T | undefined = undefined
+        let value = undefined
         // If there's no next node
         // We are removing the only node
         if (!list.head.next) {
@@ -158,12 +142,8 @@ export namespace SinglyLinkedList {
         list.length--
         return value
     }
-
-    export function insertValueAtIndex<T>(
-        list: LinkedList<T>,
-        index: number,
-        value: T
-    ): void {
+    SinglyLinkedList.removeFromTail = removeFromTail
+    function insertValueAtIndex(list, index, value) {
         // if the list's length is less than the index, just return undefined
         if (list.length < index) {
             return
@@ -189,4 +169,5 @@ export namespace SinglyLinkedList {
         list.length++
         return
     }
-}
+    SinglyLinkedList.insertValueAtIndex = insertValueAtIndex
+})((SinglyLinkedList = SinglyLinkedList || (SinglyLinkedList = {})))

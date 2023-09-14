@@ -1,40 +1,22 @@
-export namespace DoublyLinkedList {
-    interface Node<T> {
-        value: T
-        next?: Node<T>
-        prev?: Node<T>
-    }
-
-    interface LinkedList<T> {
-        head?: Node<T>
-        tail?: Node<T>
-        length: number
-    }
-
+export var DoublyLinkedList
+;(function (DoublyLinkedList) {
     // Creates a node object
-    export function createNode<T>(
-        value: T,
-        next?: Node<T>,
-        prev?: Node<T>
-    ): Node<T> {
+    function createNode(value, next, prev) {
         return {
             value,
             next,
             prev,
         }
     }
-
+    DoublyLinkedList.createNode = createNode
     // Creates a list object
-    export function createLinkedList<T>(): LinkedList<T> {
+    function createLinkedList() {
         return {
             length: 0,
         }
     }
-
-    export function findNodeAtIndex<T>(
-        list: LinkedList<T>,
-        index: number
-    ): Node<T> | undefined {
+    DoublyLinkedList.createLinkedList = createLinkedList
+    function findNodeAtIndex(list, index) {
         // Start at head
         let currentNode = list.head
         // Loop through the list
@@ -50,20 +32,17 @@ export namespace DoublyLinkedList {
         // If we made it here we return the currentNode
         return currentNode
     }
-
-    export function getValueAtIndex<T>(
-        list: LinkedList<T>,
-        index: number
-    ): T | undefined {
+    DoublyLinkedList.findNodeAtIndex = findNodeAtIndex
+    function getValueAtIndex(list, index) {
         const node = findNodeAtIndex(list, index)
         if (!node) {
             return
         }
         return node.value
     }
-
-    export function listToArray<T>(list: LinkedList<T>): T[] {
-        const arr: T[] = []
+    DoublyLinkedList.getValueAtIndex = getValueAtIndex
+    function listToArray(list) {
+        const arr = []
         let currentNode = list.head
         while (currentNode) {
             arr.push(currentNode.value)
@@ -71,11 +50,10 @@ export namespace DoublyLinkedList {
         }
         return arr
     }
-
-    export function addValueToHead<T>(list: LinkedList<T>, value: T): void {
+    DoublyLinkedList.listToArray = listToArray
+    function addValueToHead(list, value) {
         // Create a new node
         const newNode = createNode(value)
-
         if (list.length === 0) {
             list.head = newNode
             list.tail = newNode
@@ -96,8 +74,8 @@ export namespace DoublyLinkedList {
         // Increase the size of the list
         list.length++
     }
-
-    export function addValueToTail<T>(list: LinkedList<T>, value: T): void {
+    DoublyLinkedList.addValueToHead = addValueToHead
+    function addValueToTail(list, value) {
         // Create a new Node
         const newNode = createNode(value)
         // If the list is empty just set the new node to be both
@@ -118,8 +96,8 @@ export namespace DoublyLinkedList {
         // Increase the size of the list
         list.length++
     }
-
-    export function removeFromHead<T>(list: LinkedList<T>): T | undefined {
+    DoublyLinkedList.addValueToTail = addValueToTail
+    function removeFromHead(list) {
         // If the list is empty do nothing
         if (list.length === 0) {
             return
@@ -151,8 +129,8 @@ export namespace DoublyLinkedList {
         // Return the value
         return value
     }
-
-    export function removeFromTail<T>(list: LinkedList<T>): T | undefined {
+    DoublyLinkedList.removeFromHead = removeFromHead
+    function removeFromTail(list) {
         // If the list is empty do nothing
         if (list.length === 0) {
             return
@@ -172,12 +150,8 @@ export namespace DoublyLinkedList {
         list.length--
         return value
     }
-
-    export function insertValueAtIndex<T>(
-        list: LinkedList<T>,
-        index: number,
-        value: T
-    ): void {
+    DoublyLinkedList.removeFromTail = removeFromTail
+    function insertValueAtIndex(list, index, value) {
         // if the list's length is less than the index, just return undefined
         if (list.length < index) {
             return
@@ -203,4 +177,5 @@ export namespace DoublyLinkedList {
         list.length++
         return
     }
-}
+    DoublyLinkedList.insertValueAtIndex = insertValueAtIndex
+})((DoublyLinkedList = DoublyLinkedList || (DoublyLinkedList = {})))
