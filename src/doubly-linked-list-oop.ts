@@ -12,8 +12,8 @@ export namespace DoublyLinkedListOOP {
     }
 
     export class LinkedList<T> implements LinkedListInterface<T> {
-        head?: Node<T> | undefined
-        tail?: Node<T> | undefined
+        head?: Node<T>
+        tail?: Node<T>
         length: number = 0
 
         findNodeAtIndex(index: number): Node<T> | undefined {
@@ -133,6 +133,7 @@ export namespace DoublyLinkedListOOP {
             // Return the value
             return value
         }
+
         removeFromTail(): T | undefined {
             // If the list is empty do nothing
             if (this.length === 0) {
@@ -153,6 +154,7 @@ export namespace DoublyLinkedListOOP {
             this.length--
             return value
         }
+
         insertValueAtIndex(index: number, value: T): void {
             // if the list's length is less than the index, just return undefined
             if (this.length < index) {
