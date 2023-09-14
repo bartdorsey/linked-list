@@ -33,7 +33,7 @@ export namespace SinglyLinkedList {
     let currentNode = list.head;
     // Loop through the node, until we get to index
     for (let currentIndex = 0; currentIndex < index; currentIndex++) {
-      // if there's no currentNode.next, return undefined because
+      // if there's no currentNode.next, return null because
       // we've hit the end of the list
       if (!currentNode?.next) {
         return;
@@ -51,7 +51,7 @@ export namespace SinglyLinkedList {
   ): T | undefined {
     const node = findNodeAtIndex(list, index);
     if (node != undefined) {
-      return node?.value;
+      return node.value;
     } else {
       return;
     }
@@ -113,8 +113,8 @@ export namespace SinglyLinkedList {
     const value = list.head.value;
     // If there's only one node
     if (list.length === 1) {
-      // set head to undefined
-      list.head = undefined;
+      // delete the head
+      delete list.head;
       // Otherwise we need to make next the new head
     } else {
       // Set the head to be the next node
@@ -137,8 +137,8 @@ export namespace SinglyLinkedList {
     if (!list.head.next) {
       // grab the value from the head
       value = list.head.value;
-      // and set head to undefined
-      list.head = undefined;
+      // and delete the head
+      delete list.head;
       // Otherwise we need to iterate to find the tail
     } else {
       // We can use our findNodeAtIndex here
@@ -153,7 +153,7 @@ export namespace SinglyLinkedList {
       }
       // Set the next to last node as the new tail
       // by wiping out it's next property
-      nextToLastNode.next = undefined;
+      delete nextToLastNode.next;
     }
     list.length--;
     return value;

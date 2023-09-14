@@ -131,16 +131,16 @@ export namespace DoublyLinkedList {
     const value = list.head.value;
     // If there's only one node
     if (list.length === 1) {
-      // set head and tail to undefined
-      list.head = undefined;
-      list.tail = undefined;
+      // delete the head and tail
+      delete list.head;
+      delete list.tail;
       // Otherwise we need to make next the new head
     } else {
       // Set the head to be the next node
       list.head = list.head.next;
       if (list.head) {
-        // Set the new head's prev to undefined
-        list.head.prev = undefined;
+        // delete the head's prev
+        delete list.head.prev;
       }
       if (list.length === 2) {
         list.tail = list.head;
@@ -159,7 +159,7 @@ export namespace DoublyLinkedList {
     }
     // If the list's length is 1, we need to remove the head as well
     if (list.length === 1) {
-      list.head = undefined;
+      delete list.head;
     }
     if (!list.tail) {
       return;
